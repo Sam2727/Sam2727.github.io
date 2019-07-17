@@ -1051,7 +1051,7 @@ pre .javascript .function {
   right: 30px;
   z-index: 1050;
   padding: 0 6px;
-  width: 24px;
+  width: initial;
   background: #222;
   font-size: 12px;
   opacity: 1;
@@ -1203,6 +1203,74 @@ pre .javascript .function {
 }
 .use-motion .menu-item {
   opacity: 0;
+}
+.github-corner :hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+.github-corner > svg {
+  fill: #222;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+}
+@media (max-width: 991px) {
+  .github-corner .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+@media (max-width: 767px) {
+  .github-corner > svg {
+    top: inherit;
+  }
+}
+@-moz-keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(-25deg);
+  }
+  40%, 80% {
+    transform: rotate(10deg);
+  }
+}
+@-webkit-keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(-25deg);
+  }
+  40%, 80% {
+    transform: rotate(10deg);
+  }
+}
+@-o-keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(-25deg);
+  }
+  40%, 80% {
+    transform: rotate(10deg);
+  }
+}
+@keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(-25deg);
+  }
+  40%, 80% {
+    transform: rotate(10deg);
+  }
 }
 .post-body {
   overflow-wrap: break-word;
@@ -1707,7 +1775,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #1b49a3;
+  background: #1793eb;
 }
 .feed-link,
 .chat {
@@ -1946,6 +2014,9 @@ pre .javascript .function {
 }
 .footer-inner {
   text-align: center;
+}
+#animate {
+  animation: iconAnimate 1.33s ease-in-out infinite;
 }
 .with-love {
   display: inline-block;
@@ -2715,4 +2786,28 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+.posts-expand .post {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  padding: 25px;
+  padding-top: 18px;
+  -webkit-box-shadow: 0 0 10px rgba(202,203,203,0.6);
+  -moz-box-shadow: 0 0 10px rgba(202,203,204,0.6);
+}
+.post-button {
+  margin-top: 20px;
+  text-align: center;
+}
+.post-type-normal {
+  margin-bottom: 10px;
+}
+.post-type-normal {
+  margin-bottom: 0px;
+}
+.site-author-name {
+  font-size: 20px;
+  margin: 10px 0 0;
+  color: #fff;
+  font-family: 'Comic Sans MS', sans-serif;
 }
