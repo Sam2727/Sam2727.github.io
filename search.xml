@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[hexo图片居中]]></title>
     <url>%2F2019%2F07%2F17%2Fhexo%E5%9B%BE%E7%89%87%E5%B1%85%E4%B8%AD%2F</url>
-    <content type="text"><![CDATA[图片居中markdown语法中目前是没有支持图片居中的，所有的图片基本都是100%宽度，图片一般都是左对齐。markdown可以支持HTML标签，来尝试一下吧。 图片名为“1.png”，放在”hexo图片居中“文件夹下 123&lt;div align="center"&gt; &lt;img src="/hexo图片居中/test.jpeg"&gt;&lt;/img&gt;&lt;/div&gt; 调节图片大小调节图片大小还是使用HTML标签 123&lt;div align=center&gt; &lt;img src="/hexo图片居中/test.jpeg" width="300" heigh="300"&gt;&lt;/img&gt;&lt;/div&gt; 效果如下图]]></content>
+    <content type="text"><![CDATA[使用Hexo博客时文章图片居中的解决方法。 图片居中markdown语法中目前是没有支持图片居中的，所有的图片基本都是100%宽度，图片一般都是左对齐。markdown可以支持HTML标签，来尝试一下吧。 图片名为“1.png”，放在”hexo图片居中“文件夹下 123&lt;div align="center"&gt; &lt;img src="/hexo图片居中/test.jpeg"&gt;&lt;/img&gt;&lt;/div&gt; 调节图片大小调节图片大小还是使用HTML标签 123&lt;div align=center&gt; &lt;img src="/hexo图片居中/test.jpeg" width="300" heigh="300"&gt;&lt;/img&gt;&lt;/div&gt; 效果如下图]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[hexo图片显示失败]]></title>
     <url>%2F2019%2F07%2F17%2Fhexo%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E5%A4%B1%E8%B4%A5%2F</url>
-    <content type="text"><![CDATA[最近刚开始学习用Hexo建博客，中途也有遇到了很多的问题，静下心来找到合适的方法处理，啥问题都不是问题。只要有信心，人永远不会挫败。 图片显示失败hexo支持标准的Markdown语法，也许会遇到在本地插入图片可以显示，生成静态文件后发现图片不能正常显示的情况。 步骤 在hexo根目录执行该命令，安装图片插件 1npm install hexo-asset-image --save 在hexo根目录下 _config.yml 中，查找 post_asset_folder 的字段，把改值改为true ， 如下列配置文件 12345filename_case: 0render_drafts: falsepost_asset_folder: true #原来为false，改为true即可relative_link: falsefuture: true 在hexo根目录下执行该命令，新建一篇文章 1hexo new &quot;image&quot; 执行完查看/source/_posts目录下的文件，存在一个和“image”同名的文件夹 和 md 文件 将需要插入文章中图片放入到同名的文件夹中，引入到文章中即可 通过以下格式引入图片 1![](/新建的文件夹名/图片文件名) 使用hexo s命令运行hexo博客，可以发现图片能正常显示了！！]]></content>
+    <content type="text"><![CDATA[解决hexo插入本地图片显示失败的状况。 最近刚开始学习用Hexo建博客，中途也有遇到了很多的问题，静下心来找到合适的方法处理，啥问题都不是问题。只要有信心，人永远不会挫败。 图片显示失败hexo支持标准的Markdown语法，也许会遇到在本地插入图片可以显示，生成静态文件后发现图片不能正常显示的情况。 步骤 在hexo根目录执行该命令，安装图片插件 1npm install hexo-asset-image --save 在hexo根目录下 _config.yml 中，查找 post_asset_folder 的字段，把改值改为true ， 如下列配置文件 12345filename_case: 0render_drafts: falsepost_asset_folder: true #原来为false，改为true即可relative_link: falsefuture: true 在hexo根目录下执行该命令，新建一篇文章 1hexo new &quot;image&quot; 执行完查看/source/_posts目录下的文件，存在一个和“image”同名的文件夹 和 md 文件 将需要插入文章中图片放入到同名的文件夹中，引入到文章中即可 通过以下格式引入图片 1![](/新建的文件夹名/图片文件名) 使用hexo s命令运行hexo博客，可以发现图片能正常显示了！！]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
