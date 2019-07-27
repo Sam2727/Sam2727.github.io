@@ -93,16 +93,25 @@
   };
 </script>
 
-  <meta name="description" content="一位新生的程序猪">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sam Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/07/index.html">
+  <meta name="description" content="本文介绍CentOS7环境下安装ftp服务流程">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7安装FTP服务-1">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/index.html">
 <meta property="og:site_name" content="Sam Blog">
-<meta property="og:description" content="一位新生的程序猪">
+<meta property="og:description" content="本文介绍CentOS7环境下安装ftp服务流程">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/anon-conf.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/ftp-status.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/ftp-login.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/ftp-pub.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/selinux.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/pub.png">
+<meta property="og:updated_time" content="2019-07-25T11:56:18.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sam Blog">
-<meta name="twitter:description" content="一位新生的程序猪">
+<meta name="twitter:title" content="CentOS7安装FTP服务-1">
+<meta name="twitter:description" content="本文介绍CentOS7环境下安装ftp服务流程">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/anon-conf.png">
 
 
 
@@ -110,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/archives/2019/07/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/">
 
 
 
@@ -121,7 +130,7 @@
 </script>
 
   
-  <title>归档 | Sam Blog</title>
+  <title>CentOS7安装FTP服务-1 | Sam Blog</title>
   
 
 
@@ -169,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,7 +236,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -304,28 +313,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -367,323 +354,314 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-1(安装流程)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sam">
+      <meta itemprop="description" content="一位新生的程序猪">
+      <meta itemprop="image" content="/images/icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h2 class="post-title" itemprop="name headline">CentOS7安装FTP服务-1
+
+              
+            
+          </h2>
         
+
+        <div class="post-meta">
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2019">2019</h2>
-          </div>
-        
-        
+          
 
-        
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+              
+                
+              
 
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/24/CentOS7安装FTP服务-4(中文乱码)/" itemprop="url">
+              <time title="创建时间：2019-07-24 17:15:00" itemprop="dateCreated datePublished" datetime="2019-07-24T17:15:00+08:00">2019-07-24</time>
+            </span>
+          
+
+          
             
-              <span itemprop="name">CentOS7安装FTP服务-4</span>
+
             
-          </a>
-        
-      </h3>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-25 19:56:18" itemprop="dateModified" datetime="2019-07-25T19:56:18+08:00">2019-07-25</time>
+              </span>
+            
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T17:18:00+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
-    </header>
-  </article>
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/CentOS/" itemprop="url" rel="index"><span itemprop="name">CentOS</span></a></span>
 
+                
+                
+              
+            </span>
+          
 
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.1k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/24/CentOS7安装FTP服务-3(踩过的坑)/" itemprop="url">
-            
-              <span itemprop="name">CentOS7安装FTP服务-3</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T17:17:00+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <p><strong>本文介绍CentOS7环境下安装ftp服务流程</strong></p>
+<a id="more"></a>
 
-        
-        
+<hr>
+<p>系统环境：CentOS7 3.10.0-957.el7.x86_64 64位</p>
+<p>SSH软件：xShell 5</p>
+<p>FTP传输软件：xftp 5</p>
+<hr>
+<br>
 
-        
+<h2 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h2><h3 id="安装vsftpd-1"><a href="#安装vsftpd-1" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h3><p>这里安装的版本是vsftpd-3.0.2-25.el7.x86_64</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h3 id="修改vsftpd配置文件"><a href="#修改vsftpd配置文件" class="headerlink" title="修改vsftpd配置文件"></a>修改vsftpd配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure>
 
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/" itemprop="url">
-            
-              <span itemprop="name">CentOS7安装FTP服务-2</span>
-            
-          </a>
-        
-      </h3>
+<p>将以下三项修改为相同的结果，如果前面有#注释，需要把#删除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=YES				# YES表示允许匿名用户登录</span><br><span class="line">anon_upload_enable=YES				# YES表示允许匿名用户上传文件</span><br><span class="line">anon_mkdir_write_enable=YES			# YES表示允许匿名用户新建文件夹</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T17:16:00+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
+<p><img src="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/anon-conf.png" alt></p>
+<h3 id="启动并查看ftp服务状态"><a href="#启动并查看ftp服务状态" class="headerlink" title="启动并查看ftp服务状态"></a>启动并查看ftp服务状态</h3><p>systemctl启动服务成功不会有任何提示，绿色的active表示服务正在运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start vsftpd.service			# 开启vsftpd服务</span><br><span class="line">systemctl status vsftpd.service			# 查看vsftpd状态</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<p><img src="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/ftp-status.png" alt></p>
+<h3 id="设置开机启动ftp服务"><a href="#设置开机启动ftp服务" class="headerlink" title="设置开机启动ftp服务"></a>设置开机启动ftp服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable vsftpd.service</span><br></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="本地验证ftp是否正常"><a href="#本地验证ftp是否正常" class="headerlink" title="本地验证ftp是否正常"></a>本地验证ftp是否正常</h2><h3 id="安装ftp"><a href="#安装ftp" class="headerlink" title="安装ftp"></a>安装ftp</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ftp</span><br></pre></td></tr></table></figure>
 
+<h3 id="登录ftp"><a href="#登录ftp" class="headerlink" title="登录ftp"></a>登录ftp</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp localhost		# 连接ftp</span><br></pre></td></tr></table></figure>
+
+<p>name使用<strong>anonymous</strong>登录，无需密码</p>
+<p><img src="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/ftp-login.png" alt></p>
+<p>220表示服务正常，可以登陆；230表示登陆成功。</p>
+<hr>
+<h2 id="外部验证ftp是否可以正常访问"><a href="#外部验证ftp是否可以正常访问" class="headerlink" title="外部验证ftp是否可以正常访问"></a>外部验证ftp是否可以正常访问</h2><h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service		# 关闭防火墙</span><br></pre></td></tr></table></figure>
+
+<p> 为防止机器重启后防火墙重新开启，可将防火墙服务永久关闭。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>在windows浏览器中输入ftp:// IP地址，可看到ftp下的目录（pub文件夹为是系统预设的）</p>
+<p><img src="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/ftp-pub.png" alt></p>
+<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><p>尝试上传文件到文件夹中，发现ftp目录下并不能读写文件，是因为文件夹权限不足和selinux引起的。</p>
+<h3 id="设置文件夹权限"><a href="#设置文件夹权限" class="headerlink" title="设置文件夹权限"></a>设置文件夹权限</h3><p>将pub文件夹的权限设置为777</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 -R /var/ftp/pub</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭selinux服务"><a href="#关闭selinux服务" class="headerlink" title="关闭selinux服务"></a>关闭selinux服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<p>将SELINUX=enforcing改为：SELINUX=<strong>disabled</strong></p>
+<p><img src="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/selinux.png" alt></p>
+<h3 id="重启系统"><a href="#重启系统" class="headerlink" title="重启系统"></a>重启系统</h3><p>重启系统，让配置生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -r now</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><p><img src="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/pub.png" alt></p>
+<p><strong>以上是vsftp服务的安装，如需拓展，请看后面的文章。</strong></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/" itemprop="url">
-            
-              <span itemprop="name">CentOS7安装FTP服务-1</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T17:15:00+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/17/hexo图片居中/" itemprop="url">
-            
-              <span itemprop="name">hexo图片居中</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-17T21:17:21+08:00" content="2019-07-17">
-          07-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/17/hexo图片显示失败/" itemprop="url">
-            
-              <span itemprop="name">hexo图片显示失败</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-17T20:05:50+08:00" content="2019-07-17">
-          07-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/16/first/" itemprop="url">
-            
-              <span itemprop="name">Mybatis分页插件</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-16T11:49:25+08:00" content="2019-07-16">
-          07-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/15/hello-world/" itemprop="url">
-            
-              <span itemprop="name">Hello World</span>
-            
-          </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-15T21:32:26+08:00" content="2019-07-15">
-          07-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #66737f;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/17/hexo图片居中/" rel="next" title="hexo图片居中">
+                <i class="fa fa-chevron-left"></i> hexo图片居中
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/" rel="prev" title="CentOS7安装FTP服务-2">
+                CentOS7安装FTP服务-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -703,8 +681,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -829,6 +816,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装vsftpd"><span class="nav-number">1.</span> <span class="nav-text">安装vsftpd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装vsftpd-1"><span class="nav-number">1.1.</span> <span class="nav-text">安装vsftpd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改vsftpd配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">修改vsftpd配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动并查看ftp服务状态"><span class="nav-number">1.3.</span> <span class="nav-text">启动并查看ftp服务状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置开机启动ftp服务"><span class="nav-number">1.4.</span> <span class="nav-text">设置开机启动ftp服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地验证ftp是否正常"><span class="nav-number">2.</span> <span class="nav-text">本地验证ftp是否正常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装ftp"><span class="nav-number">2.1.</span> <span class="nav-text">安装ftp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录ftp"><span class="nav-number">2.2.</span> <span class="nav-text">登录ftp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部验证ftp是否可以正常访问"><span class="nav-number">3.</span> <span class="nav-text">外部验证ftp是否可以正常访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙"><span class="nav-number">3.1.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录"><span class="nav-number">3.2.</span> <span class="nav-text">登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件读写"><span class="nav-number">3.3.</span> <span class="nav-text">文件读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置文件夹权限"><span class="nav-number">3.4.</span> <span class="nav-text">设置文件夹权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭selinux服务"><span class="nav-number">3.5.</span> <span class="nav-text">关闭selinux服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启系统"><span class="nav-number">3.6.</span> <span class="nav-text">重启系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件"><span class="nav-number">3.7.</span> <span class="nav-text">上传文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -999,6 +1003,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   <script src="/js/next-boot.js?v=7.2.0"></script>
 
@@ -1012,6 +1020,8 @@
 
   
 
+
+  
 
 
   

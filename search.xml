@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CentOS7安装FTP服务-4]]></title>
+    <url>%2F2019%2F07%2F24%2FCentOS7%E5%AE%89%E8%A3%85FTP%E6%9C%8D%E5%8A%A1-4(%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81)%2F</url>
+    <content type="text"><![CDATA[本文介绍CentOS中文文件乱码的解决方法 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 FTP传输软件：xftp 5 上传中文文件乱码如何查看Linux系统语言 1echo $LANG 一般显示为en_US.UTF-8，这是系统默认的语言 输出系统时间检查中文显示是否正常 1date 如果能显示星期几，说明系统能正常输出中文，尝试修改xftp的显示编码（修改方法在最后） 解决Linux中文乱码查看是否装有中文语言包 1locale Centos7 安装中文字体命令为 1yum groupinstall "fonts" 安装完成后查看是否成功安装中文语言包 1locale -a |grep &quot;zh_CN&quot; 若显示以下内容，说明语言包安装成功 123456zh_CNzh_CN.gb18030zh_CN.gb2312zh_CN.gbkzh_CN.utf8 打开语言配置文件，按i进入编辑模式 1vim /etc/sysconfig/i18n 添加以下内容到文件中 12LANG="zh_CN.UTF-8"LC_ALL="zh_CN.UTF-8" 按Esc，输入:wq，保存文件并退出。 更新下文件刚刚修改过的文件 1source /etc/sysconfig/i18n 然后修改本地文字，将en_US.UTF-8修改为zh_CN.UTF-8即可 1vim /etc/locale.conf 再查看系统语言 1echo $LANG 说明已经修改成功 输出时间检测一下 1date 如果xftp的中文还是显示乱码，可参考以下修改xftp显示编码的内容 修改xftp显示编码 在新建会话属性中点击选项，可见使用UTF-8编码，打勾，点击确认保存 重新上传文件，发现上传的文件能正确显示中文 进入ftp文件夹，查看文件内容 12cd /var/ftp/pub # 进入ftp文件夹ll # 查看文件 新上传的文件名能正常显示，OK！]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>CentOS</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CentOS7安装FTP服务-3]]></title>
+    <url>%2F2019%2F07%2F24%2FCentOS7%E5%AE%89%E8%A3%85FTP%E6%9C%8D%E5%8A%A1-3(%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91)%2F</url>
+    <content type="text"><![CDATA[本文主要介绍作者搭建ftp服务器时所遇到的问题及解决方法 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 FTP传输软件：xftp 5 问题匿名用户登录失败使用匿名用户登录失败，查看下/etc/vsftpd/vsftpd.conf 1anonymous_enable=YES # 将NO改成YES，NO说明不允许匿名用户登录 匿名用户不能上传文件使用xftp软件上传文件失败，先查看文件夹的权限，再打开vsftpd配置文件修改一下 1anon_upload_enable=YES # 将NO改成YES，NO是不允许匿名用户上传文件 匿名用户对文件删除、更名匿名用户拥有pub目录下文件的删除、更名的权限，在vsftpd.conf文件末尾加上以下命令 1anon_other_write_enable=YES 更改用户相应的权限设置在使用ftp服务时，只希望让用户只能登录ftp，而不能登录进入系统时，就需要对特定用户进行访问权限的设置，让系统阻止其登录系统，可以尝试以下操作。 123usermod -s /sbin/nologin test # 限制用户test不能telnet，只能使用ftpusermod -s /bin/bash test # 用户test恢复正常权限usermod -d /home/test test # 更改用户test的主目录为/test 用户连接不上服务器防火墙关闭状态、ftp服务器正常、匿名用户可以登录，但本地用户一直登录不上，可以尝试以下方法。 123vim /etc/pam.d/vsftpd # 打开配置文件auth required pam_shells.so # 将该行注释 把该配置文件红框中的一行注释(最前面加#)，保存退出即可 用户新建目录、文件的权限umask是unix操作系统的概念，umask决定目录和文件被创建时得到的初始权限umask = 022 时，新建的目录 权限是755，文件的权限是 644umask = 077 时，新建的目录 权限是700，文件的权限时 600 添加以下命令在vsftpd.conf文件末尾 1anon_umask=022 vsftpd的local_umask和anon_umask借鉴了它默认情况下vsftp上传之后文件的权限是600，目录权限是700想要修改上传之后文件的权限，有两种情况如果使用vsftp的是本地用户则要修改配置文件中的 local_umask 的值如果使用vsftp的是匿名用户则要修改配置文件中的 anon_umask 的值 不关闭防火墙，开启ftp服务在刚安装好ftp服务时，一般先关闭防火墙以便配置服务，但是在以后的使用中，拥有防火墙的保护，可以抵御一些针对性的网络攻击，所以在开启ftp服务时，可以将ftp加入到防火墙的白名单中即可。 12345[root@localhost vsftpd]# systemctl start firewalld.service # 开启防火墙[root@localhost vsftpd]# firewall-cmd --permanent --zone=public --add-service=ftpsuccess # 添加成功显示success[root@localhost vsftpd]# firewall-cmd --reload # 重新加载防火墙配置文件success # 成功重载 用户只能访问自身的目录站点创建的用户登录成功是，不仅可以访问当前用户下的文件夹，还可以访问到其他的文件夹，安全性肯定大大的降低，所以要限制用户访问的范围。登录后默认进入到自己的目录站点，并且不能访问其他的文件夹。 在/etc/vsftpd/vsftpd.conf文件中，找到以下几点，默认是有#注释的，先将#删掉，再修改内容 123chroot_local_user=NOchroot_list_enable=YESchroot_list_file=/etc/vsftpd/chroot_list 默认chroot_list是不存在的，需要新建chroot_list，路径或文件名随意，必须与chroot_list_file一致！在新建的文件中加入用户名，一行一个，完成后保存退出。 参数说明：chroot_local_user= NO 则所有用户不被限定在主目录内，chroot_list_enable= YES 表示要启用chroot_list_file， 因为chroot_local_user=NO，即全体用户都“不被限定在主目录内”，所以总是作为“例外列表”的chroot_list_file这时列出的是那些“会被限制在主目录下”的用户。 通过搭配能实现以下几种效果：①当chroot_list_enable=YES，chroot_local_user=YES时，在/etc/vsftpd.chroot_list文件中列出的用户，可以切换到其他目录；未在文件中列出的用户，不能切换到其他目录。②当chroot_list_enable=YES，chroot_local_user=NO时，在/etc/vsftpd.chroot_list文件中列出的用户，不能切换到其他目录；未在文件中列出的用户，可以切换到其他目录。③当chroot_list_enable=NO，chroot_local_user=YES时，所有的用户均不能切换到其他目录。④当chroot_list_enable=NO，chroot_local_user=NO时，所有的用户均可以切换到其他目录。 对于chroot_local_user与chroot_list_enable的组合效果，可以参考下表： chroot_local_user=YES chroot_local_user=NO chroot_list_enable=YES 1、所有用户都被限制在其主目录下 2、使用chroot_list_file指定的用户列表，这些用户作为“例外”，不受限制 1、所有用户都不被限制在其主目录下 2、使用chroot_list_file指定的用户列表，这些用户作为“例外”，受到限制 chroot_list_enable=NO 1、所有用户都被限制在其主目录下 2、不使用chroot_list_file指定的用户列表，没有任何”例外“用户 1、所有用户都不被限制在其主目录下 2、不使用chroot_list_file指定的用户列表，没有任何”例外“用户]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>CentOS</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CentOS7安装FTP服务-2]]></title>
+    <url>%2F2019%2F07%2F24%2FCentOS7%E5%AE%89%E8%A3%85FTP%E6%9C%8D%E5%8A%A1-2(%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)%2F</url>
+    <content type="text"><![CDATA[介绍ftp的基本设置及常用命令 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 FTP传输软件：xftp 5 修改文件夹权限​ 刚安装好vsftpd服务时，使用anonymous匿名用户使用xftp登录ftp服务器，也许会出现上传文件失败的情况，可能是因为匿名用户文件夹权限不够的原因，需要修改文件夹权限 1chmod -R 777 /var/ftp/pub 基本命令创建、删除用户在root用户登录系统，可使用以下命令创建新用户。 12useradd -d test # 创建用户testpasswd test # 为test用户设置密码 如果要删除用户，使用以下命令 1234#在root用户下： userdel -r test#在普通用户下： sudo userdel -r test -r 表示将用户相对应的目录一并删除，如不需删除用户的文件，则不用加-r 服务管理方式service和systemctlservice命令service命令是去/etc/init.d目录下，执行相关的程序 123service vsftpd start # service命令启动vsftpd脚本/etc/init.d/vsftpd start # 直接启动vsftpd脚本update-rc.d vsftpd defaults # 开机自启动 systemctl命令systemmd是Linux系统最新的初始化系统(init)，作用是提高系统的启动速度，尽可能启动较少的进程，尽可能更多进程并发启动。systemd对应的进程管理命令是systemctl systemctl命令兼容了service即systemctl也会去/etc/init.d目录下，查看，执行相关程序 1234567891.列出所有服务systemctl list-unit-files -type=service2.Linux中如何启动、重启、停止、重载服务以及检查服务(如vsftpd.service)状态systemctl start vsftpd.service # 开启服务systemctl restart vsftpd.service # 重启服务systemctl stop vsftpd.service # 停止服务systemctl reload vsftpd.service # 重载服务systemctl status vsftpd.service # 查看服务状态 操作vsftpd服务1234systemctl start vsftpd # 开启vsftpd服务systemctl stop vsftpd # 关闭vsftpd服务systemctl enable vsftpd # 开机启动vsftpd服务systemctl status vsftpd # 查看vsftpd状态 防火墙操作12345systemctl start firewalld # 开启防火墙systemctl stop firewalld # 关闭防火墙systemctl enable firewalld # 开机启动防火墙systemctl disable firewalld # 禁用开机启动防火墙systemctl status firewalld # 查看防火墙状态 端口相关操作123456789101112131415161718# 查看防火墙已开放的端口firewall-cmd --list-ports# 开启防火墙端口firewall-cmd --zone=public --add-port=80/tcp --permanent命令含义：-zone # 作用域-add-port=80/tcp # 添加端口，格式为：端口/通讯协议-permanent # 永久生效，没有此参数重启后失败# 重载防火墙端口信息firewall-cmd --reload# 查看监听(Listen)的端口netstat -lntp# 检查端口被哪个进程占用netstat -lnp | grep 8080 查看CentOS7开机启动项1systemctl list-unit-files 左边是服务名称，右边是状态，enabled是开机启动，disabled是开机不启动 可以过滤查询开机启动项 1systemctl list-unit-files | grep enabled # 查看开机启动的服务 也可以根据服务名查询 1systemctl list-unit-files | grep vsftpd # 查询的服务名为vsftpd 关机、重启命令CentOS常用重启命令 1234reboot # 普通重启shutdown -r now # 立刻重启(root用户使用)shutdown -r 10 # 10分钟后重启(root用户使用)shutdown -r 10:17 # 在10:17时自动重启(root用户使用) CentOS常用关机命令 1234halt # 立刻关机poweroff # 立刻关机shutdown -h now # 立刻关机(root用户使用)shutdown -h 10 # 10分钟后自动关机 shutdown命令安全的将系统关机。有些用户会使用直接断掉电源的方式来关闭linux，这是十分危险的。因为linux与windows不同，其后台运行着许多进程，所以强制关机可能会导致进程的数据丢失，使系统处于不稳定的状态，甚至在有的系统中会损坏硬件设备。 查看Linux系统语言查看当前Linux系统使用的语言 1echo $LANG ftp文件存放位置vsftpd配置文件1/etc/vsfptd/vsftpd.conf : vsftpd的主要配置文件 匿名用户文件夹1/var/ftp/pub : 该文件夹下为匿名用户登录可见 权限用户文件夹1/home/用户名：该文件夹为当前登录用户可见]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>CentOS</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CentOS7安装FTP服务-1]]></title>
+    <url>%2F2019%2F07%2F24%2FCentOS7%E5%AE%89%E8%A3%85FTP%E6%9C%8D%E5%8A%A1-1(%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B)%2F</url>
+    <content type="text"><![CDATA[本文介绍CentOS7环境下安装ftp服务流程 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 FTP传输软件：xftp 5 安装vsftpd安装vsftpd这里安装的版本是vsftpd-3.0.2-25.el7.x86_64 1yum -y install vsftpd 修改vsftpd配置文件1vim /etc/vsftpd/vsftpd.conf 将以下三项修改为相同的结果，如果前面有#注释，需要把#删除 123anonymous_enable=YES # YES表示允许匿名用户登录anon_upload_enable=YES # YES表示允许匿名用户上传文件anon_mkdir_write_enable=YES # YES表示允许匿名用户新建文件夹 启动并查看ftp服务状态systemctl启动服务成功不会有任何提示，绿色的active表示服务正在运行 12systemctl start vsftpd.service # 开启vsftpd服务systemctl status vsftpd.service # 查看vsftpd状态 设置开机启动ftp服务1systemctl enable vsftpd.service 本地验证ftp是否正常安装ftp1yum -y install ftp 登录ftp1ftp localhost # 连接ftp name使用anonymous登录，无需密码 220表示服务正常，可以登陆；230表示登陆成功。 外部验证ftp是否可以正常访问关闭防火墙1systemctl stop firewalld.service # 关闭防火墙 为防止机器重启后防火墙重新开启，可将防火墙服务永久关闭。 1systemctl disable firewalld.service 登录在windows浏览器中输入ftp:// IP地址，可看到ftp下的目录（pub文件夹为是系统预设的） 文件读写尝试上传文件到文件夹中，发现ftp目录下并不能读写文件，是因为文件夹权限不足和selinux引起的。 设置文件夹权限将pub文件夹的权限设置为777 1chmod 777 -R /var/ftp/pub 关闭selinux服务1vim /etc/selinux/config 将SELINUX=enforcing改为：SELINUX=disabled 重启系统重启系统，让配置生效 1shutdown -r now 上传文件 以上是vsftp服务的安装，如需拓展，请看后面的文章。]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>CentOS</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hexo图片居中]]></title>
     <url>%2F2019%2F07%2F17%2Fhexo%E5%9B%BE%E7%89%87%E5%B1%85%E4%B8%AD%2F</url>
     <content type="text"><![CDATA[使用Hexo博客时文章图片居中的解决方法。 图片居中markdown语法中目前是没有支持图片居中的，所有的图片基本都是100%宽度，图片一般都是左对齐。markdown可以支持HTML标签，来尝试一下吧。 图片名为“1.png”，放在”hexo图片居中“文件夹下 123&lt;div align="center"&gt; &lt;img src="/hexo图片居中/test.jpeg"&gt;&lt;/img&gt;&lt;/div&gt; 调节图片大小调节图片大小还是使用HTML标签 123&lt;div align=center&gt; &lt;img src="/hexo图片居中/test.jpeg" width="300" heigh="300"&gt;&lt;/img&gt;&lt;/div&gt; 效果如下图]]></content>
@@ -14,7 +62,7 @@
   <entry>
     <title><![CDATA[hexo图片显示失败]]></title>
     <url>%2F2019%2F07%2F17%2Fhexo%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E5%A4%B1%E8%B4%A5%2F</url>
-    <content type="text"><![CDATA[解决hexo插入本地图片显示失败的状况。 最近刚开始学习用Hexo建博客，中途也有遇到了很多的问题，静下心来找到合适的方法处理，啥问题都不是问题。只要有信心，人永远不会挫败。 图片显示失败hexo支持标准的Markdown语法，也许会遇到在本地插入图片可以显示，生成静态文件后发现图片不能正常显示的情况。 步骤 在hexo根目录执行该命令，安装图片插件 1npm install hexo-asset-image --save 在hexo根目录下 _config.yml 中，查找 post_asset_folder 的字段，把改值改为true ， 如下列配置文件 12345filename_case: 0render_drafts: falsepost_asset_folder: true #原来为false，改为true即可relative_link: falsefuture: true 在hexo根目录下执行该命令，新建一篇文章 1hexo new &quot;image&quot; 执行完查看/source/_posts目录下的文件，存在一个和“image”同名的文件夹 和 md 文件 将需要插入文章中图片放入到同名的文件夹中，引入到文章中即可 通过以下格式引入图片 1![](/新建的文件夹名/图片文件名) 使用hexo s命令运行hexo博客，可以发现图片能正常显示了！！]]></content>
+    <content type="text"><![CDATA[解决hexo插入本地图片显示失败的状况。 最近刚开始学习用Hexo建博客，中途也有遇到了很多的问题，静下心来找到合适的方法处理，啥问题都不是问题。只要有信心，人永远不会挫败。 图片显示失败Hexo支持标准的Markdown语法，也许会遇到在本地插入图片可以显示，生成静态文件后发现图片不能正常显示的情况。 步骤 在hexo根目录执行该命令，安装图片插件 1npm install hexo-asset-image --save 在hexo根目录下 _config.yml 中，查找 post_asset_folder 的字段，把改值改为true ， 如下列配置文件 12345filename_case: 0render_drafts: falsepost_asset_folder: true #原来为false，改为true即可relative_link: falsefuture: true 在hexo根目录下执行该命令，新建一篇文章 1hexo new &quot;image&quot; 执行完查看/source/_posts目录下的文件，存在一个和“image”同名的文件夹 和 md 文件 将需要插入文章中图片放入到同名的文件夹中，引入到文章中即可 通过以下格式引入图片 1![](/新建的文件夹名/图片文件名) 使用hexo s命令运行hexo博客，可以发现图片能正常显示了！！]]></content>
       <categories>
         <category>Hexo</category>
       </categories>

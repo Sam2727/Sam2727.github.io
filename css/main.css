@@ -1608,6 +1608,16 @@ pre .javascript .function {
 .rtl.post-title {
   font-family: UKIJ Ekran;
 }
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3;
+}
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
+}
 .sidebar {
   position: fixed;
   right: 0;
@@ -1707,7 +1717,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8a8103;
+  background: #534ed6;
 }
 .feed-link,
 .chat {
@@ -2742,4 +2752,7 @@ hr {
   margin: 10px 0 0;
   color: #fff;
   font-family: 'Comic Sans MS', sans-serif;
+}
+.post-header {
+  font-size: 60px;
 }

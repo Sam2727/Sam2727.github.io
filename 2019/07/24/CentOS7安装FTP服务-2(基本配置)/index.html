@@ -93,17 +93,26 @@
   };
 </script>
 
-  <meta name="description" content="一位新生的程序猪">
-<meta property="og:type" content="website">
-<meta property="og:title" content="This is categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="介绍ftp的基本设置及常用命令">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7安装FTP服务-2">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/index.html">
 <meta property="og:site_name" content="Sam Blog">
-<meta property="og:description" content="一位新生的程序猪">
+<meta property="og:description" content="介绍ftp的基本设置及常用命令">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-16T13:34:28.207Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/useradd.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/status.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/status-enabled.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/status-vsftpd.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/en_US.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/pub.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/home.png">
+<meta property="og:updated_time" content="2019-07-26T05:57:24.272Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="This is categories">
-<meta name="twitter:description" content="一位新生的程序猪">
+<meta name="twitter:title" content="CentOS7安装FTP服务-2">
+<meta name="twitter:description" content="介绍ftp的基本设置及常用命令">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/useradd.png">
 
 
 
@@ -111,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/categories/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/">
 
 
 
@@ -122,7 +131,7 @@
 </script>
 
   
-  <title>This is categories | Sam Blog</title>
+  <title>CentOS7安装FTP服务-2 | Sam Blog</title>
   
 
 
@@ -260,7 +269,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -305,28 +314,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -370,78 +357,316 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/CentOS7安装FTP服务-2(基本配置)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sam">
+      <meta itemprop="description" content="一位新生的程序猪">
+      <meta itemprop="image" content="/images/icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h2 class="post-title" itemprop="name headline">This is categories
+        
+        
+          <h2 class="post-title" itemprop="name headline">CentOS7安装FTP服务-2
 
-</h2>
+              
+            
+          </h2>
+        
 
-<div class="post-meta">
-  
-  
+        <div class="post-meta">
 
+          
+          
+          
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
 
+              
+                
+              
+
+              <time title="创建时间：2019-07-24 17:16:00" itemprop="dateCreated datePublished" datetime="2019-07-24T17:16:00+08:00">2019-07-24</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-26 13:57:24" itemprop="dateModified" datetime="2019-07-26T13:57:24+08:00">2019-07-26</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/CentOS/" itemprop="url" rel="index"><span itemprop="name">CentOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.5k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>介绍ftp的基本设置及常用命令</strong></p>
+<a id="more"></a>
+
+<hr>
+<p>系统环境：CentOS7 3.10.0-957.el7.x86_64 64位</p>
+<p>SSH软件：xShell 5</p>
+<p>FTP传输软件：xftp 5</p>
+<hr>
+<br>
+
+<h2 id="修改文件夹权限"><a href="#修改文件夹权限" class="headerlink" title="修改文件夹权限"></a>修改文件夹权限</h2><p>​    刚安装好vsftpd服务时，使用anonymous匿名用户使用xftp登录ftp服务器，也许会出现上传文件失败的情况，可能是因为匿名用户文件夹权限不够的原因，需要修改文件夹权限</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 /var/ftp/pub</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="创建、删除用户"><a href="#创建、删除用户" class="headerlink" title="创建、删除用户"></a>创建、删除用户</h3><p>在root用户登录系统，可使用以下命令创建新用户。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -d test		# 创建用户test</span><br><span class="line">passwd test			# 为test用户设置密码</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/useradd.png" alt></p>
+<p>如果要删除用户，使用以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>在root用户下：  </span><br><span class="line">userdel -r test</span><br><span class="line"><span class="meta">#</span>在普通用户下：  </span><br><span class="line">sudo userdel -r test</span><br></pre></td></tr></table></figure>
+
+<p><strong>-r</strong> 表示将用户相对应的目录一并删除，如不需删除用户的文件，则不用加-r</p>
+<h3 id="服务管理方式service和systemctl"><a href="#服务管理方式service和systemctl" class="headerlink" title="服务管理方式service和systemctl"></a>服务管理方式service和systemctl</h3><h4 id="service命令"><a href="#service命令" class="headerlink" title="service命令"></a>service命令</h4><p>service命令是去/etc/init.d目录下，执行相关的程序</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start				# service命令启动vsftpd脚本</span><br><span class="line">/etc/init.d/vsftpd start			# 直接启动vsftpd脚本</span><br><span class="line">update-rc.d vsftpd defaults			# 开机自启动</span><br></pre></td></tr></table></figure>
+
+<h4 id="systemctl命令"><a href="#systemctl命令" class="headerlink" title="systemctl命令"></a>systemctl命令</h4><p>systemmd是Linux系统最新的初始化系统(init)，作用是提高系统的启动速度，尽可能启动较少的进程，尽可能更多进程并发启动。systemd对应的进程管理命令是systemctl</p>
+<h5 id="systemctl命令兼容了service"><a href="#systemctl命令兼容了service" class="headerlink" title="systemctl命令兼容了service"></a>systemctl命令兼容了service</h5><p>即systemctl也会去/etc/init.d目录下，查看，执行相关程序</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.列出所有服务</span><br><span class="line">systemctl list-unit-files -type=service</span><br><span class="line"></span><br><span class="line">2.Linux中如何启动、重启、停止、重载服务以及检查服务(如vsftpd.service)状态</span><br><span class="line">systemctl start vsftpd.service			# 开启服务</span><br><span class="line">systemctl restart vsftpd.service		# 重启服务</span><br><span class="line">systemctl stop vsftpd.service			# 停止服务</span><br><span class="line">systemctl reload vsftpd.service			# 重载服务</span><br><span class="line">systemctl status vsftpd.service			# 查看服务状态</span><br></pre></td></tr></table></figure>
+
+<h3 id="操作vsftpd服务"><a href="#操作vsftpd服务" class="headerlink" title="操作vsftpd服务"></a>操作vsftpd服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start vsftpd		# 开启vsftpd服务</span><br><span class="line">systemctl stop vsftpd		# 关闭vsftpd服务</span><br><span class="line">systemctl enable vsftpd		# 开机启动vsftpd服务</span><br><span class="line">systemctl status vsftpd		# 查看vsftpd状态</span><br></pre></td></tr></table></figure>
+
+<h3 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld		# 开启防火墙</span><br><span class="line">systemctl stop firewalld		# 关闭防火墙</span><br><span class="line">systemctl enable firewalld		# 开机启动防火墙</span><br><span class="line">systemctl disable firewalld		# 禁用开机启动防火墙</span><br><span class="line">systemctl status firewalld		# 查看防火墙状态</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口相关操作"><a href="#端口相关操作" class="headerlink" title="端口相关操作"></a>端口相关操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 查看防火墙已开放的端口</span><br><span class="line">firewall-cmd --list-ports</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 开启防火墙端口</span><br><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br><span class="line">命令含义：</span><br><span class="line">-zone					# 作用域</span><br><span class="line">-add-port=80/tcp		# 添加端口，格式为：端口/通讯协议</span><br><span class="line">-permanent				# 永久生效，没有此参数重启后失败</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 重载防火墙端口信息</span><br><span class="line">firewall-cmd --reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 查看监听(Listen)的端口</span><br><span class="line">netstat -lntp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 检查端口被哪个进程占用</span><br><span class="line">netstat -lnp | grep 8080</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看CentOS7开机启动项"><a href="#查看CentOS7开机启动项" class="headerlink" title="查看CentOS7开机启动项"></a>查看CentOS7开机启动项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files</span><br></pre></td></tr></table></figure>
+
+<p>左边是服务名称，右边是状态，enabled是开机启动，disabled是开机不启动</p>
+<p><img src="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/status.png" alt></p>
+<p>可以过滤查询开机启动项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files | grep enabled	# 查看开机启动的服务</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/status-enabled.png" alt></p>
+<p>也可以根据服务名查询</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files | grep vsftpd		# 查询的服务名为vsftpd</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/status-vsftpd.png" alt></p>
+<h3 id="关机、重启命令"><a href="#关机、重启命令" class="headerlink" title="关机、重启命令"></a>关机、重启命令</h3><p>CentOS常用重启命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reboot					# 普通重启</span><br><span class="line">shutdown -r now			# 立刻重启(root用户使用)</span><br><span class="line">shutdown -r 10			# 10分钟后重启(root用户使用)</span><br><span class="line">shutdown -r 10:17		# 在10:17时自动重启(root用户使用)</span><br></pre></td></tr></table></figure>
+
+<p>CentOS常用关机命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">halt					# 立刻关机</span><br><span class="line">poweroff				# 立刻关机</span><br><span class="line">shutdown -h now			# 立刻关机(root用户使用)</span><br><span class="line">shutdown -h 10			# 10分钟后自动关机</span><br></pre></td></tr></table></figure>
+
+<p>shutdown命令安全的将系统关机。有些用户会使用直接断掉电源的方式来关闭linux，这是十分危险的。因为linux与windows不同，其后台运行着许多进程，所以强制关机可能会导致进程的数据丢失，使系统处于不稳定的状态，甚至在有的系统中会损坏硬件设备。</p>
+<h3 id="查看Linux系统语言"><a href="#查看Linux系统语言" class="headerlink" title="查看Linux系统语言"></a>查看Linux系统语言</h3><p>查看当前Linux系统使用的语言</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $LANG</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/en_US.png" alt></p>
+<hr>
+<h2 id="ftp文件存放位置"><a href="#ftp文件存放位置" class="headerlink" title="ftp文件存放位置"></a>ftp文件存放位置</h2><h3 id="vsftpd配置文件"><a href="#vsftpd配置文件" class="headerlink" title="vsftpd配置文件"></a>vsftpd配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/vsfptd/vsftpd.conf : vsftpd的主要配置文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="匿名用户文件夹"><a href="#匿名用户文件夹" class="headerlink" title="匿名用户文件夹"></a>匿名用户文件夹</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/ftp/pub : 该文件夹下为匿名用户登录可见</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/pub.png" alt></p>
+<h3 id="权限用户文件夹"><a href="#权限用户文件夹" class="headerlink" title="权限用户文件夹"></a>权限用户文件夹</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/用户名：该文件夹为当前登录用户可见</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/24/CentOS7安装FTP服务-2(基本配置)/home.png" alt></p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #66737f;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
 </div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-        
-        
-          <div class="category-all-page">
-            <div class="category-all-title">
-              
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-              目前共计 6 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Web/">Web</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Web/SSM/">SSM</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">4</span></li></ul></li></ul>
-            </div>
-          </div>
-        
-      </div>
-      
-      
       
     </div>
     
-
-
+    
 
     
-    
-    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/24/CentOS7安装FTP服务-1(安装流程)/" rel="next" title="CentOS7安装FTP服务-1">
+                <i class="fa fa-chevron-left"></i> CentOS7安装FTP服务-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/24/CentOS7安装FTP服务-3(踩过的坑)/" rel="prev" title="CentOS7安装FTP服务-3">
+                CentOS7安装FTP服务-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -470,8 +695,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -596,6 +830,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改文件夹权限"><span class="nav-number">1.</span> <span class="nav-text">修改文件夹权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.</span> <span class="nav-text">基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建、删除用户"><span class="nav-number">2.1.</span> <span class="nav-text">创建、删除用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务管理方式service和systemctl"><span class="nav-number">2.2.</span> <span class="nav-text">服务管理方式service和systemctl</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#service命令"><span class="nav-number">2.2.1.</span> <span class="nav-text">service命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#systemctl命令"><span class="nav-number">2.2.2.</span> <span class="nav-text">systemctl命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#systemctl命令兼容了service"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">systemctl命令兼容了service</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作vsftpd服务"><span class="nav-number">2.3.</span> <span class="nav-text">操作vsftpd服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防火墙操作"><span class="nav-number">2.4.</span> <span class="nav-text">防火墙操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口相关操作"><span class="nav-number">2.5.</span> <span class="nav-text">端口相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看CentOS7开机启动项"><span class="nav-number">2.6.</span> <span class="nav-text">查看CentOS7开机启动项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关机、重启命令"><span class="nav-number">2.7.</span> <span class="nav-text">关机、重启命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看Linux系统语言"><span class="nav-number">2.8.</span> <span class="nav-text">查看Linux系统语言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ftp文件存放位置"><span class="nav-number">3.</span> <span class="nav-text">ftp文件存放位置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpd配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">vsftpd配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名用户文件夹"><span class="nav-number">3.2.</span> <span class="nav-text">匿名用户文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限用户文件夹"><span class="nav-number">3.3.</span> <span class="nav-text">权限用户文件夹</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
