@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="验证码识别成为对抗反爬虫的必修课之一，懂得制作验证码识别也是一个必不可少的技能。本文简单介绍次世代验证码识别系统的使用方法。">
+<meta name="keywords" content="次世代,验证码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="次世代验证码识别系统的使用">
+<meta property="og:url" content="http://yoursite.com/2019/08/26/次世代验证码/index.html">
+<meta property="og:site_name" content="Sam Blog">
+<meta property="og:description" content="验证码识别成为对抗反爬虫的必修课之一，懂得制作验证码识别也是一个必不可少的技能。本文简单介绍次世代验证码识别系统的使用方法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/验证码链接.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/code1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/code2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/code3.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/功能选项.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/图像处理.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/字模.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/字符截取.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/字符粘连.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/粘连截取.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/全部字模.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/次世代验证码/识别结果.png">
+<meta property="og:updated_time" content="2019-08-26T06:34:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="次世代验证码识别系统的使用">
+<meta name="twitter:description" content="验证码识别成为对抗反爬虫的必修课之一，懂得制作验证码识别也是一个必不可少的技能。本文简单介绍次世代验证码识别系统的使用方法。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/26/次世代验证码/验证码链接.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/26/次世代验证码/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>次世代验证码识别系统的使用 | Sam Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">This is Sam Blog~~</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/次世代验证码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sam">
+      <meta itemprop="description" content="一位新生的程序猪">
+      <meta itemprop="image" content="/images/icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">次世代验证码识别系统的使用
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-26 10:32:51" itemprop="dateCreated datePublished" datetime="2019-08-26T10:32:51+08:00">2019-08-26</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-26 14:34:35" itemprop="dateModified" datetime="2019-08-26T14:34:35+08:00">2019-08-26</time>
+              </span>
+            
+          
+
+	
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/验证码识别/" itemprop="url" rel="index"><span itemprop="name">验证码识别</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-signal"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.7k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 min</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+
+      
+        <blockquote>
+<p>验证码识别成为对抗反爬虫的必修课之一，懂得制作验证码识别也是一个必不可少的技能。本文简单介绍次世代验证码识别系统的使用方法。</p>
+</blockquote>
+<a id="more"></a>
+
+<br>
+
+<hr>
+<p>软件版本：次世代验证码识别系统2.3破解版</p>
+<p>dll：AntiVC.dll</p>
+<hr>
+<br>
+
+<p>参考了验证码识别相关的博文，验证码识别的大概思路是<strong>收集训练集–&gt;图像处理–&gt;获取图片特征值–&gt;训练–&gt;识别</strong>，其中图像处理部分包括了<strong>灰度化、二值化、去噪、分割</strong>等过程。本文将尽量有详有略地讲述整个过程，以及在开发过程中遇到的问题。</p>
+<hr>
+<h1 id="次世代识别系统的使用"><a href="#次世代识别系统的使用" class="headerlink" title="次世代识别系统的使用"></a>次世代识别系统的使用</h1><h2 id="1、收集训练集"><a href="#1、收集训练集" class="headerlink" title="1、收集训练集"></a>1、收集训练集</h2><p>启动次世代识别系统2.3破解版，新建工程、新建项目，这时可以开始制作验证码的字模了。</p>
+<p>次世代系统支持<strong>在线下载图片</strong>，在中间的编辑框内输入验证码链接，点击“下载图像”后，在右边的图片框内会显示出图片。由于爬取的是教务系统的网站，验证码链接就不附上了。该软件也支持<strong>读取本地图片</strong>，写一个简单的爬虫循环爬取足够多的验证码图片，放在同一个文件夹下，点击<strong>读入图像</strong>选择文件夹即可。</p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/验证码链接.png" style="width:90%;">
+</div>
+
+
+
+<h2 id="2、图像处理"><a href="#2、图像处理" class="headerlink" title="2、图像处理"></a>2、图像处理</h2><div>
+    <table>
+        <tr>    
+            <td><img src="/2019/08/26/次世代验证码/code1.png" style="width:60%;"></td>    
+            <td><img src="/2019/08/26/次世代验证码/code2.png" style="width:60%;"></td>
+            <td><img src="/2019/08/26/次世代验证码/code3.png" style="width:60%;"></td>
+        </tr>
+    </table>
+</div>
+可见以上三张验证码图片上都有很多随机的噪点出现，虽然这些噪点不会影响用肉眼识别验证码，但是会极大地干扰到机器识别验证码的正确率，所以图像处理最大的作用就是尽可能去除干扰项，提高机器识别正确率。常用的方法就是将图片**灰度化、二值化、去毛刺**等等，根据图片样式不同，去除的方法也不一样。
+
+
+
+<p>依次选择：显示字符分割矩形框、显示识别结果，右边加号为添加滤镜，识别模式和分割方式根据验证码图片的样式来选择，<strong>这两样设置可能会影响识别率</strong>。</p>
+<p>可参考次世代验证码官方文档：<a href="https://antiyzm.sinaapp.com/archives/121" target="_blank" rel="noopener">分割模式详解</a>、<a href="https://antiyzm.sinaapp.com/archives/119" target="_blank" rel="noopener">识别模式详解</a></p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/功能选项.png" style="width:90%;">
+</div>
+
+
+<p>经过一番尝试，对于这种干扰项为纯噪点的验证码图片，<strong>二值化–&gt;去除毛刺</strong>（阀值的大小会影响图片质量，数值仅供参考），两步之后，大部分的噪点已被去除，可以接着下一步的操作。(个人在制作字模时发现图像处理的步骤越多，识别所需时间随之增大，建议使用步骤少的方法。)</p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/图像处理.png" style="width:90%;">
+</div>
+
+
+
+
+
+<h2 id="3、训练"><a href="#3、训练" class="headerlink" title="3、训练"></a>3、训练</h2><p>次世代验证码识别系统建立字模时会生成图片特征值，获取图片特征值与训练的过程和在一起了。</p>
+<p>点击右上角<strong>字模管理</strong>，选中<strong>自动分割图像</strong>或<strong>手动分割图像</strong>，如果两个字符之间有粘连需要手动分割，</p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/字模.png" style="width:90%;">
+</div>
+
+
+
+
+<p>双击第一个字符，软件自动截取出来，选择切除白边（杂点多的需要去除杂点），在右边对应字符框填g。</p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/字符截取.png" style="width:90%;">
+</div>
+
+
+<p>制作一个字模后点击<strong>图像重载</strong>，双击第二个字符，发现三个字符粘连在一起，只能更换成<strong>手动分割图像模式</strong></p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/字符粘连.png" style="width:90%;">
+</div>
+
+
+
+<p>手动框选第二个字符的位置</p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/粘连截取.png" style="width:90%;">
+</div>
+
+
+
+<p>将四个字符都制作成字模后，右下角<strong>保存退出</strong></p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/全部字模.png" style="width:90%;">
+</div>
+
+
+
+<h2 id="4、识别"><a href="#4、识别" class="headerlink" title="4、识别"></a>4、识别</h2><p>回到主界面，点击<strong>重新识别</strong>，显示出<strong>gyh2</strong>，识别成功！</p>
+<div align="center">
+    <img src="/2019/08/26/次世代验证码/识别结果.png" style="width:90%;">
+</div>
+
+
+
+<p>往后接着制作更多的字模，当识别率已经满足需求时，发布识别库、输入识别库的密码，生成一个专属的cds文件。每个网站的验证码样式不同，都要自己训练数据，制作字模的数量也会有所差别，有时间的可以探索下去。</p>
+<hr>
+<h1 id="调用次世代验证码DLL"><a href="#调用次世代验证码DLL" class="headerlink" title="调用次世代验证码DLL"></a>调用次世代验证码DLL</h1><h2 id="1、python"><a href="#1、python" class="headerlink" title="1、python"></a>1、python</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getCheckcode</span><span class="params">(self)</span>:</span></span><br><span class="line">    dll = ctypes.windll.LoadLibrary(<span class="string">'./config/AntiVC.dll'</span>)   <span class="comment"># 加载dll</span></span><br><span class="line">    a = dll.LoadCdsFromFile(<span class="string">'./config/test.cds'</span>,<span class="string">'123123'</span>)   <span class="comment">#加载cds字库(cds字库路径，密码)</span></span><br><span class="line">    code = <span class="string">'0000'</span></span><br><span class="line">    file = <span class="string">'img/checkcode.png'</span>  <span class="comment"># 待识别图片的路径</span></span><br><span class="line">    <span class="keyword">if</span> a != <span class="number">-1</span>:   <span class="comment"># 验证字符库的索引是否大于-1</span></span><br><span class="line">        ttt = dll.GetVcodeFromFile(a, file, code)   <span class="comment"># 识别结果放到code中</span></span><br><span class="line">        <span class="keyword">return</span> code</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'error'</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #66737f;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/次世代/" rel="tag"># 次世代</a>
+          
+            <a href="/tags/验证码/" rel="tag"># 验证码</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/vim学习笔记/" rel="next" title="Vim学习笔记">
+                <i class="fa fa-chevron-left"></i> Vim学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/26/CentOS搭建代理服务器/" rel="prev" title="CentOS搭建代理服务器">
+                CentOS搭建代理服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/icon.png" alt="Sam">
+  
+  <p class="site-author-name" itemprop="name">Sam</p>
+  <div class="site-description motion-element" itemprop="description">一位新生的程序猪</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Sam2727/" title="GitHub &rarr; https://github.com/Sam2727/" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com" title="https://www.baidu.com" rel="noopener" target="_blank">Sam</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#次世代识别系统的使用"><span class="nav-number">1.</span> <span class="nav-text">次世代识别系统的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、收集训练集"><span class="nav-number">1.1.</span> <span class="nav-text">1、收集训练集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、图像处理"><span class="nav-number">1.2.</span> <span class="nav-text">2、图像处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、训练"><span class="nav-number">1.3.</span> <span class="nav-text">3、训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、识别"><span class="nav-number">1.4.</span> <span class="nav-text">4、识别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调用次世代验证码DLL"><span class="nav-number">2.</span> <span class="nav-text">调用次世代验证码DLL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、python"><span class="nav-number">2.1.</span> <span class="nav-text">1、python</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+      
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <!-- modify icon to fire by szw -->
+              <i class="fa fa-history fa-" aria-hidden="true"></i>
+              近期文章
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+              
+                <li>
+                  <a href="/2019/08/26/CentOS搭建代理服务器/" title="CentOS搭建代理服务器" target="_blank">CentOS搭建代理服务器</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/26/次世代验证码/" title="次世代验证码识别系统的使用" target="_blank">次世代验证码识别系统的使用</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/12/vim学习笔记/" title="Vim学习笔记" target="_blank">Vim学习笔记</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/07/24/CentOS7安装FTP服务-4(中文乱码)/" title="CentOS7安装FTP服务-4" target="_blank">CentOS7安装FTP服务-4</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/07/24/CentOS7安装FTP服务-3(踩过的坑)/" title="CentOS7安装FTP服务-3" target="_blank">CentOS7安装FTP服务-3</a>
+                </li>
+              
+            </ul>
+          </div>
+      
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user-circle-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sam</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">Site words total count:26k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">Reading time:24 min</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 不蒜子浏览次数统计
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+Total <span id="busuanzi_value_site_pv"></span> views.
+<i class="fa fa-spinner fa-spin"></i> 
+您是xxx的第<span id="busuanzi_value_site_uv"></span>个小伙伴
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"> </script>
+<div>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp
+本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
+-->
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">Unique Visitor 
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider"><i class="fa fa-spinner fa-spin"></i> </span>
+  
+
+  
+    <span class="post-meta-item-icon">Site View 
+      <i class="fa fa-plane"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+</div>
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+
+    <!-- 背景线条设置 -->
+    
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+ 
+
+</body>
+</html>

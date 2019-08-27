@@ -72,7 +72,7 @@
     version: '7.2.0',
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    copycode: {"enable":false,"show_result":false,"style":null},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -482,7 +482,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -511,7 +511,11 @@
         
           
         
-        <span class="site-state-item-count">6</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -536,7 +540,15 @@
         
           
         
-        <span class="site-state-item-count">4</span>
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -593,6 +605,41 @@
 
       
 
+      
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <!-- modify icon to fire by szw -->
+              <i class="fa fa-history fa-" aria-hidden="true"></i>
+              近期文章
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+              
+                <li>
+                  <a href="/2019/08/26/CentOS搭建代理服务器/" title="CentOS搭建代理服务器" target="_blank">CentOS搭建代理服务器</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/26/次世代验证码/" title="次世代验证码识别系统的使用" target="_blank">次世代验证码识别系统的使用</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/12/vim学习笔记/" title="Vim学习笔记" target="_blank">Vim学习笔记</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/07/24/CentOS7安装FTP服务-4(中文乱码)/" title="CentOS7安装FTP服务-4" target="_blank">CentOS7安装FTP服务-4</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/07/24/CentOS7安装FTP服务-3(踩过的坑)/" title="CentOS7安装FTP服务-3" target="_blank">CentOS7安装FTP服务-3</a>
+                </li>
+              
+            </ul>
+          </div>
+      
+
+
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
@@ -616,7 +663,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">Site words total count:21k</span>
+    <span title="站点总字数">Site words total count:26k</span>
   
 
   
@@ -625,7 +672,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">Reading time:19 分钟</span>
+    <span title="站点阅读时长">Reading time:24 min</span>
   
 </div>
 
@@ -637,7 +684,29 @@
 
 
 
-        
+
+
+
+<!-- 不蒜子浏览次数统计
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+Total <span id="busuanzi_value_site_pv"></span> views.
+<i class="fa fa-spinner fa-spin"></i> 
+您是xxx的第<span id="busuanzi_value_site_uv"></span>个小伙伴
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"> </script>
+<div>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp
+本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
+-->
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
 <div class="busuanzi-count">
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
@@ -651,18 +720,20 @@
   
 
   
-    <span class="post-meta-divider">|</span>
+    <span class="post-meta-divider"><i class="fa fa-spinner fa-spin"></i> </span>
   
 
   
-    <span class="post-meta-item-icon">Page View 
-      <i class="fa fa-eye"></i>
+    <span class="post-meta-item-icon">Site View 
+      <i class="fa fa-plane"></i>
     </span>
     <span class="site-pv" title="总访问量">
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
     </span>
   
+
 </div>
+
 
 
 
@@ -689,9 +760,12 @@
 
     
 
+
+    <!-- 背景线条设置 -->
     
     <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
     
+
     
   </div>
 

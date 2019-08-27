@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CentOS搭建代理服务器]]></title>
+    <url>%2F2019%2F08%2F26%2FCentOS%E6%90%AD%E5%BB%BA%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[本文主要介绍在CentOS环境下搭建Squid代理服务器。 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 Server端配置简介Squid是Linux自带的代理软件，与其他代理软件如Apache、Socks等相比，下载安装简单，配置灵活，支持缓存和多种协议。 安装1yum -y install squid # 安装squid服务 配置squid.conf文件123456789vi /etc/squid/squid.conf# 在文件56行将deny修改为allow# And finally deny all other access to this proxyhttp_access allow all# 建议修改默认端口，防止被爬虫扫描使用# Squid normally listens to port 3128http_port 3100 启动12345# 启动squid服务(关闭为stop)systemctl start squid# 开机自启动squid服务systemctl enable squid 日志squid的日志位于/var/log/squid目录下。 添加用户验证安装http工具yum install httpd-tools -y 生成密码文件12345mkdir /etc/squid3# test为登录用户名htpasswd -cd /etc/squid3/passwords test# 提示输入密码，根据个人需求设置，在此设置为123456# 注意密码长度不要超过8位 测试密码文件12345678/usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwords# 输入 用户名 密码# 用户名与密码之间留一个空格test 123123# 提示OK说明设置成功OK# 测试完成，ctrl+c退出 修改配置文件vi /etc/squid/squid.conf打开配置文件 12345# 在56行http_access allow/deny all 上面加上如下权限配置，一定要放在这句上面！# 用户名密码配置auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid3/passwordsacl auth_user proxy_auth REQUIREDhttp_access allow auth_user 设置高匿代理vi /etc/squid/squid.conf打开配置文件 1234# 文件末尾加上以下高匿配置request_header_access X-Forwarded-For deny allrequest_header_access From deny allrequest_header_access Via deny all 解决方法启动squid服务时提示如下错误 /usr/sbin/squid: relocation error: /usr/sbin/squid: symbol SSL_set_alpn_protos, version libssl.so.10 not defined in file libss…e reference 原因：未安装openssl 解决方法：yum install openssl 安装后重新启动squid即可：systemctl start squid Client端配置Windows端查询下未设置代理前的ip地址 在Chrome浏览器中设置代理，点击右上角三个点–&gt;设置，滑到最底点击高级，找到打开代理设置–&gt;局域网设置，勾选上为LAN使用代理服务器，下面填写代理服务器的地址和端口即可。 保存后再查询ip地址，已经发生了改变，说明成功设置代理！]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[次世代验证码识别系统的使用]]></title>
+    <url>%2F2019%2F08%2F26%2F%E6%AC%A1%E4%B8%96%E4%BB%A3%E9%AA%8C%E8%AF%81%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[验证码识别成为对抗反爬虫的必修课之一，懂得制作验证码识别也是一个必不可少的技能。本文简单介绍次世代验证码识别系统的使用方法。 软件版本：次世代验证码识别系统2.3破解版 dll：AntiVC.dll 参考了验证码识别相关的博文，验证码识别的大概思路是收集训练集–&gt;图像处理–&gt;获取图片特征值–&gt;训练–&gt;识别，其中图像处理部分包括了灰度化、二值化、去噪、分割等过程。本文将尽量有详有略地讲述整个过程，以及在开发过程中遇到的问题。 次世代识别系统的使用1、收集训练集启动次世代识别系统2.3破解版，新建工程、新建项目，这时可以开始制作验证码的字模了。 次世代系统支持在线下载图片，在中间的编辑框内输入验证码链接，点击“下载图像”后，在右边的图片框内会显示出图片。由于爬取的是教务系统的网站，验证码链接就不附上了。该软件也支持读取本地图片，写一个简单的爬虫循环爬取足够多的验证码图片，放在同一个文件夹下，点击读入图像选择文件夹即可。 2、图像处理 可见以上三张验证码图片上都有很多随机的噪点出现，虽然这些噪点不会影响用肉眼识别验证码，但是会极大地干扰到机器识别验证码的正确率，所以图像处理最大的作用就是尽可能去除干扰项，提高机器识别正确率。常用的方法就是将图片**灰度化、二值化、去毛刺**等等，根据图片样式不同，去除的方法也不一样。 依次选择：显示字符分割矩形框、显示识别结果，右边加号为添加滤镜，识别模式和分割方式根据验证码图片的样式来选择，这两样设置可能会影响识别率。 可参考次世代验证码官方文档：分割模式详解、识别模式详解 经过一番尝试，对于这种干扰项为纯噪点的验证码图片，二值化–&gt;去除毛刺（阀值的大小会影响图片质量，数值仅供参考），两步之后，大部分的噪点已被去除，可以接着下一步的操作。(个人在制作字模时发现图像处理的步骤越多，识别所需时间随之增大，建议使用步骤少的方法。) 3、训练次世代验证码识别系统建立字模时会生成图片特征值，获取图片特征值与训练的过程和在一起了。 点击右上角字模管理，选中自动分割图像或手动分割图像，如果两个字符之间有粘连需要手动分割， 双击第一个字符，软件自动截取出来，选择切除白边（杂点多的需要去除杂点），在右边对应字符框填g。 制作一个字模后点击图像重载，双击第二个字符，发现三个字符粘连在一起，只能更换成手动分割图像模式 手动框选第二个字符的位置 将四个字符都制作成字模后，右下角保存退出 4、识别回到主界面，点击重新识别，显示出gyh2，识别成功！ 往后接着制作更多的字模，当识别率已经满足需求时，发布识别库、输入识别库的密码，生成一个专属的cds文件。每个网站的验证码样式不同，都要自己训练数据，制作字模的数量也会有所差别，有时间的可以探索下去。 调用次世代验证码DLL1、python12345678910def getCheckcode(self): dll = ctypes.windll.LoadLibrary('./config/AntiVC.dll') # 加载dll a = dll.LoadCdsFromFile('./config/test.cds','123123') #加载cds字库(cds字库路径，密码) code = '0000' file = 'img/checkcode.png' # 待识别图片的路径 if a != -1: # 验证字符库的索引是否大于-1 ttt = dll.GetVcodeFromFile(a, file, code) # 识别结果放到code中 return code else: return 'error']]></content>
+      <categories>
+        <category>技术</category>
+        <category>验证码识别</category>
+      </categories>
+      <tags>
+        <tag>次世代</tag>
+        <tag>验证码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vim学习笔记]]></title>
+    <url>%2F2019%2F08%2F12%2Fvim%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[本文记录了学习Vim过程的常用知识 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 Vim简介Vim是从vi发展出来的一个文本编辑器。代码补全、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。简单来说，vi是老式的字处理器，不过功能已经很齐全了，但是还有可以进步的地方。Vim啧可以说是程序开发者的一项很好用的工具。 Vim可以分为三种状态，分别是命令模式、编辑模式和底线命令模式。使用vim命令进入文件时，默认是进入命令模式。当在命令模式时，可以用 h、j、k、l 来分别实现左、下、上、右箭头的功能。 安装Vim工具[root@sam-aliyun ~]# yum install -y vim-enhanced 卸载Vim工具[root@sam-aliyun ~]# yum remove -y vim* Vim常用命令1、命令模式yy 复制当前行 nyy 复制从当前行开始后的n行 p 粘贴已复制的内容 dd 删除当前行，并保存在剪切板中 ndd 删除从当前行开始后的n行，并保存在剪切板中 命令 yy 复制当前行 nyy 复制从当前行开始后的n行 p 粘贴已复制的内容 dd 删除当前行，并保存在剪切板中 ndd 删除从当前行开始后的n行，并保存在剪切板中 2、编辑模式i 小写字母i，在光标位置插入 a 小写字母a，在光标的下一个位置插入 I 大写字母I，在光标所在行的第一个非空格处插入 A 大写字母A，在光标所在行的最后一个字符处插入 o 小写字母o，在光标所在行的下一行处插入新行 O 大写字母O，在光标所在行的上一行处插入新行 r 小写字母r，替换光标所在处的字符一次 R 大写字母R，持续替换光标所在处的字符，直到按下ESC 命令 i 小写字母i 在光标位置插入 a 小写字母a 在光标的下一个位置插入 I 大写字母I 在光标所在行的第一个非空格处插入 A 大写字母A 在光标所在行的最后一个字符处插入 o 小写字母o 在光标所在行的下一行处插入新行 O 大写字母O 在光标所在行的上一行处插入新行 r 小写字母r 替换光标所在处的字符一次 R 大写字母R 持续替换光标所在处的字符，直到按下ESC 3、底线命令模式在命令模式下按 : (英文冒号)进入底线命令模式 :/xyz 搜索字符串xyz :%s/x/y 将每行中第一个x替换成y :%s/x/y/g 将每行中所有的x替换成y :n,ms/x/y 将第n-m行的x替换成y :!ifconfig 执行命令ifconfig :w 保存文件 :w! 强制保存文件（前提是用户有修改文件访问权限的权限） :q 退出缓冲区 :q! 强制退出缓冲区而不保存 :wq 保存文件并退出缓冲区 :ZZ 保存文件并且退出 :wq! 强制保存文件并退出缓冲区（前提是用户有修改文件访问权限的权限） :w 另存为名为filename文件 :n1,n2 w 将n1行到n2行的数据另存为名为filename文件 : x 如果文件有更改，则保存后退出。否则直接退出。 :-r !date 插入当前时间 命令 :/xyz 搜索字符串xyz :%s/x/y 将每行中第一个x替换成y :%s/x/y/g 将每行中所有的x替换成y :n,ms/x/y 将第n-m行的x替换成y :!ifconfig 执行命令ifconfig :w 保存文件 :w! 强制保存文件（前提是用户有修改文件访问权限的权限） :q 退出缓冲区 :q! 强制退出缓冲区而不保存 :wq 保存文件并退出缓冲区 :ZZ 保存文件并且退出 :wq! 强制保存文件并退出缓冲区（前提是用户有修改文件访问权限的权限） :w 另存为名为filename文件 :n1,n2 w 将n1行到n2行的数据另存为名为filename文件 :x 如果文件有更改，则保存后退出。否则直接退出。 :-r !date 插入当前时间 4、块选择模式按下 CTRL + v 进入块选择模式 按上下左右箭头选中文本 按 I 或 A 键在选中字符 前 或 后 插入字符，按 d 或 x 删除当前选中的字符 按ESC键退出即生效 问题1.取消搜索高亮命令模式下，输入:nohlsearch 或者 :set nohlsearch； 当然，可以简写，noh或者set noh]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[CentOS7安装FTP服务-4]]></title>
     <url>%2F2019%2F07%2F24%2FCentOS7%E5%AE%89%E8%A3%85FTP%E6%9C%8D%E5%8A%A1-4(%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81)%2F</url>
     <content type="text"><![CDATA[本文介绍CentOS中文文件乱码的解决方法 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 FTP传输软件：xftp 5 上传中文文件乱码如何查看Linux系统语言 1echo $LANG 一般显示为en_US.UTF-8，这是系统默认的语言 输出系统时间检查中文显示是否正常 1date 如果能显示星期几，说明系统能正常输出中文，尝试修改xftp的显示编码（修改方法在最后） 解决Linux中文乱码查看是否装有中文语言包 1locale Centos7 安装中文字体命令为 1yum groupinstall "fonts" 安装完成后查看是否成功安装中文语言包 1locale -a |grep &quot;zh_CN&quot; 若显示以下内容，说明语言包安装成功 123456zh_CNzh_CN.gb18030zh_CN.gb2312zh_CN.gbkzh_CN.utf8 打开语言配置文件，按i进入编辑模式 1vim /etc/sysconfig/i18n 添加以下内容到文件中 12LANG="zh_CN.UTF-8"LC_ALL="zh_CN.UTF-8" 按Esc，输入:wq，保存文件并退出。 更新下文件刚刚修改过的文件 1source /etc/sysconfig/i18n 然后修改本地文字，将en_US.UTF-8修改为zh_CN.UTF-8即可 1vim /etc/locale.conf 再查看系统语言 1echo $LANG 说明已经修改成功 输出时间检测一下 1date 如果xftp的中文还是显示乱码，可参考以下修改xftp显示编码的内容 修改xftp显示编码 在新建会话属性中点击选项，可见使用UTF-8编码，打勾，点击确认保存 重新上传文件，发现上传的文件能正确显示中文 进入ftp文件夹，查看文件内容 12cd /var/ftp/pub # 进入ftp文件夹ll # 查看文件 新上传的文件名能正常显示，OK！]]></content>
@@ -27,13 +64,13 @@
   <entry>
     <title><![CDATA[CentOS7安装FTP服务-2]]></title>
     <url>%2F2019%2F07%2F24%2FCentOS7%E5%AE%89%E8%A3%85FTP%E6%9C%8D%E5%8A%A1-2(%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)%2F</url>
-    <content type="text"><![CDATA[介绍ftp的基本设置及常用命令 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 FTP传输软件：xftp 5 修改文件夹权限​ 刚安装好vsftpd服务时，使用anonymous匿名用户使用xftp登录ftp服务器，也许会出现上传文件失败的情况，可能是因为匿名用户文件夹权限不够的原因，需要修改文件夹权限 1chmod -R 777 /var/ftp/pub 基本命令创建、删除用户在root用户登录系统，可使用以下命令创建新用户。 12useradd -d test # 创建用户testpasswd test # 为test用户设置密码 如果要删除用户，使用以下命令 1234#在root用户下： userdel -r test#在普通用户下： sudo userdel -r test -r 表示将用户相对应的目录一并删除，如不需删除用户的文件，则不用加-r 服务管理方式service和systemctlservice命令service命令是去/etc/init.d目录下，执行相关的程序 123service vsftpd start # service命令启动vsftpd脚本/etc/init.d/vsftpd start # 直接启动vsftpd脚本update-rc.d vsftpd defaults # 开机自启动 systemctl命令systemmd是Linux系统最新的初始化系统(init)，作用是提高系统的启动速度，尽可能启动较少的进程，尽可能更多进程并发启动。systemd对应的进程管理命令是systemctl systemctl命令兼容了service即systemctl也会去/etc/init.d目录下，查看，执行相关程序 1234567891.列出所有服务systemctl list-unit-files -type=service2.Linux中如何启动、重启、停止、重载服务以及检查服务(如vsftpd.service)状态systemctl start vsftpd.service # 开启服务systemctl restart vsftpd.service # 重启服务systemctl stop vsftpd.service # 停止服务systemctl reload vsftpd.service # 重载服务systemctl status vsftpd.service # 查看服务状态 操作vsftpd服务1234systemctl start vsftpd # 开启vsftpd服务systemctl stop vsftpd # 关闭vsftpd服务systemctl enable vsftpd # 开机启动vsftpd服务systemctl status vsftpd # 查看vsftpd状态 防火墙操作12345systemctl start firewalld # 开启防火墙systemctl stop firewalld # 关闭防火墙systemctl enable firewalld # 开机启动防火墙systemctl disable firewalld # 禁用开机启动防火墙systemctl status firewalld # 查看防火墙状态 端口相关操作123456789101112131415161718# 查看防火墙已开放的端口firewall-cmd --list-ports# 开启防火墙端口firewall-cmd --zone=public --add-port=80/tcp --permanent命令含义：-zone # 作用域-add-port=80/tcp # 添加端口，格式为：端口/通讯协议-permanent # 永久生效，没有此参数重启后失败# 重载防火墙端口信息firewall-cmd --reload# 查看监听(Listen)的端口netstat -lntp# 检查端口被哪个进程占用netstat -lnp | grep 8080 查看CentOS7开机启动项1systemctl list-unit-files 左边是服务名称，右边是状态，enabled是开机启动，disabled是开机不启动 可以过滤查询开机启动项 1systemctl list-unit-files | grep enabled # 查看开机启动的服务 也可以根据服务名查询 1systemctl list-unit-files | grep vsftpd # 查询的服务名为vsftpd 关机、重启命令CentOS常用重启命令 1234reboot # 普通重启shutdown -r now # 立刻重启(root用户使用)shutdown -r 10 # 10分钟后重启(root用户使用)shutdown -r 10:17 # 在10:17时自动重启(root用户使用) CentOS常用关机命令 1234halt # 立刻关机poweroff # 立刻关机shutdown -h now # 立刻关机(root用户使用)shutdown -h 10 # 10分钟后自动关机 shutdown命令安全的将系统关机。有些用户会使用直接断掉电源的方式来关闭linux，这是十分危险的。因为linux与windows不同，其后台运行着许多进程，所以强制关机可能会导致进程的数据丢失，使系统处于不稳定的状态，甚至在有的系统中会损坏硬件设备。 查看Linux系统语言查看当前Linux系统使用的语言 1echo $LANG ftp文件存放位置vsftpd配置文件1/etc/vsfptd/vsftpd.conf : vsftpd的主要配置文件 匿名用户文件夹1/var/ftp/pub : 该文件夹下为匿名用户登录可见 权限用户文件夹1/home/用户名：该文件夹为当前登录用户可见]]></content>
+    <content type="text"><![CDATA[介绍ftp的基本设置及常用命令 系统环境：CentOS7 3.10.0-957.el7.x86_64 64位 SSH软件：xShell 5 FTP传输软件：xftp 5 修改文件夹权限​ 刚安装好vsftpd服务时，使用anonymous匿名用户使用xftp登录ftp服务器，也许会出现上传文件失败的情况，可能是因为匿名用户文件夹权限不够的原因，需要修改文件夹权限 1chmod -R 777 /var/ftp/pub Linux基本命令查看CentOS版本1234[root@localhost ~]# cat /etc/centos-release # 查看系统版本CentOS Linux release 7.2.1511 (Core) [root@localhost ~]# lscpu # 查看CPU信息 创建、删除用户在root用户登录系统，可使用以下命令创建新用户。 12useradd -d test # 创建用户testpasswd test # 为test用户设置密码 如果要删除用户，使用以下命令 1234#在root用户下： userdel -r test#在普通用户下： sudo userdel -r test -r 表示将用户相对应的目录一并删除，如不需删除用户的文件，则不用加-r 服务管理方式service和systemctlservice命令service命令是去/etc/init.d目录下，执行相关的程序 123service vsftpd start # service命令启动vsftpd脚本/etc/init.d/vsftpd start # 直接启动vsftpd脚本update-rc.d vsftpd defaults # 开机自启动 systemctl命令systemmd是Linux系统最新的初始化系统(init)，作用是提高系统的启动速度，尽可能启动较少的进程，尽可能更多进程并发启动。systemd对应的进程管理命令是systemctl systemctl命令兼容了service即systemctl也会去/etc/init.d目录下，查看，执行相关程序 1234567891.列出所有服务systemctl list-unit-files -type=service2.Linux中如何启动、重启、停止、重载服务以及检查服务(如vsftpd.service)状态systemctl start vsftpd.service # 开启服务systemctl restart vsftpd.service # 重启服务systemctl stop vsftpd.service # 停止服务systemctl reload vsftpd.service # 重载服务systemctl status vsftpd.service # 查看服务状态 操作vsftpd服务1234systemctl start vsftpd # 开启vsftpd服务systemctl stop vsftpd # 关闭vsftpd服务systemctl enable vsftpd # 开机启动vsftpd服务systemctl status vsftpd # 查看vsftpd状态 防火墙操作12345systemctl start firewalld # 开启防火墙systemctl stop firewalld # 关闭防火墙systemctl enable firewalld # 开机启动防火墙systemctl disable firewalld # 禁用开机启动防火墙systemctl status firewalld # 查看防火墙状态 端口相关操作123456789101112131415161718192021# 查看防火墙已开放的端口firewall-cmd --list-ports# 开启防火墙端口firewall-cmd --zone=public --add-port=80/tcp --permanent命令含义：-zone # 作用域-add-port=80/tcp # 添加端口，格式为：端口/通讯协议-permanent # 永久生效，没有此参数重启后失败# 删除防火墙端口firewall-cmd --zone=public --remove-port=80/tcp --permanent# 重载防火墙端口信息firewall-cmd --reload# 查看监听(Listen)的端口netstat -lntp# 检查端口被哪个进程占用netstat -lnp | grep 8080 网卡操作12345678# 查看网卡状态ifconfig –a# 开启网卡(后面为所需开启的网卡名字)ifup ifcfg-enp7s0# 关闭网卡(后面为所需关闭的网卡名字)ifdown ifcfg-enp7s0 查看CentOS7开机启动项1systemctl list-unit-files 左边是服务名称，右边是状态，enabled是开机启动，disabled是开机不启动 可以过滤查询开机启动项 1systemctl list-unit-files | grep enabled # 查看开机启动的服务 也可以根据服务名查询 1systemctl list-unit-files | grep vsftpd # 查询的服务名为vsftpd 关机、重启命令CentOS常用重启命令 1234reboot # 普通重启shutdown -r now # 立刻重启(root用户使用)shutdown -r 10 # 10分钟后重启(root用户使用)shutdown -r 10:17 # 在10:17时自动重启(root用户使用) CentOS常用关机命令 1234halt # 立刻关机poweroff # 立刻关机shutdown -h now # 立刻关机(root用户使用)shutdown -h 10 # 10分钟后自动关机 shutdown命令安全的将系统关机。有些用户会使用直接断掉电源的方式来关闭linux，这是十分危险的。因为linux与windows不同，其后台运行着许多进程，所以强制关机可能会导致进程的数据丢失，使系统处于不稳定的状态，甚至在有的系统中会损坏硬件设备。 查看Linux系统语言查看当前Linux系统使用的语言 1echo $LANG 查看实时网络带宽占用常用iftop工具监控实时网络带宽 1yum -y install iftop # 安装iftop工具 查看本机已有网卡 1ifconfig 其中eth0是服务器的公网网卡，每台机器的网卡名字不一定相同 1iftop -i eth0 # 监控eth0网卡的网络情况 查看外网占用带宽的情况，从而判断哪个占用带宽最多，防止外网恶意连接。 可将占用带宽最多的IP，用防火墙或者相关措施屏蔽访问即可。 iftop -i eth0 -B -F 172.31.***.173 可使用以上命令监控某个特定IP的带宽访问情况 界面参数说明： “&lt;=”和”=&gt;”表示的是流量的方向 “TX”：从本机网卡发出的流量 “RX”：网卡接收的流量 “TOTAL”：网卡发送接收的总流量 “cum”：iftop开始运行到当前时间点的总流量 “peak”：网卡流量的峰值 “rates”：分别表示最近2s、10s、40s的平均流量 ftp文件存放位置vsftpd配置文件1/etc/vsfptd/vsftpd.conf : vsftpd的主要配置文件 匿名用户文件夹1/var/ftp/pub : 该文件夹下为匿名用户登录可见 权限用户文件夹1/home/用户名：该文件夹为当前登录用户可见]]></content>
       <categories>
         <category>Linux</category>
-        <category>CentOS</category>
       </categories>
       <tags>
         <tag>Linux</tag>
+        <tag>CentOS</tag>
       </tags>
   </entry>
   <entry>
@@ -83,10 +120,5 @@
         <tag>SSM</tag>
         <tag>技术</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F07%2F15%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
 </search>
