@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="记录学习Solr过程中所遇到的问题及解决方法">
+<meta name="keywords" content="Solr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solr学习（二）">
+<meta property="og:url" content="http://yoursite.com/2019/08/30/Solr学习（二）/index.html">
+<meta property="og:site_name" content="Sam Blog">
+<meta property="og:description" content="记录学习Solr过程中所遇到的问题及解决方法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/无法添加core.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/查看配置文件.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/tomcat启动.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/core添加成功.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/core设置.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/分词出错.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/中文分词.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/user表结构.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/根目录schema配置.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/查询数据.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/添加域.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/添加域-1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/添加域-2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/查询数据-1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/solrJ地址.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/solr首页.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/solrJ报错.png">
+<meta property="og:updated_time" content="2019-09-03T06:40:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solr学习（二）">
+<meta name="twitter:description" content="记录学习Solr过程中所遇到的问题及解决方法">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/30/Solr学习（二）/无法添加core.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/30/Solr学习（二）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Solr学习（二） | Sam Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sam Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">This is Sam Blog~~</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/Solr学习（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sam">
+      <meta itemprop="description" content="一位新生的程序猪">
+      <meta itemprop="image" content="/images/icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sam Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Solr学习（二）
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-30 16:16:52" itemprop="dateCreated datePublished" datetime="2019-08-30T16:16:52+08:00">2019-08-30</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-03 14:40:20" itemprop="dateModified" datetime="2019-09-03T14:40:20+08:00">2019-09-03</time>
+              </span>
+            
+          
+
+	
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Solr/" itemprop="url" rel="index"><span itemprop="name">Solr</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">2 min</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+
+      
+        <blockquote>
+<p>记录学习Solr过程中所遇到的问题及解决方法</p>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="solr无法添加core"><a href="#solr无法添加core" class="headerlink" title="solr无法添加core"></a>solr无法添加core</h2><h3 id="错误显示"><a href="#错误显示" class="headerlink" title="错误显示"></a>错误显示</h3><blockquote>
+<div align="center">
+<img src="/2019/08/30/Solr学习（二）/无法添加core.png" style="width:80%;">
+</div>
+
+<p>Linux安装好solr后，新建core时报错，提示缺少配置文件：<strong>Error CREATEing SolrCore ‘collection1’: Unable to create core [collection1] Caused by: Can’t find resource ‘solrconfig.xml’ in classpath or ‘/usr/solr/solrhome/new_core’</strong></p>
+</blockquote>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><div align="center">
+    <img src="/2019/08/30/Solr学习（二）/查看配置文件.png" style="width:85%;">
+</div>
+
+
+<p>将上图的文件复制到/usr/solr/solrhome/<strong>new_core</strong>中，就是所要创建的core目录中（new_core为存放core的文件夹名，可根据需要自行修改）</p>
+<p><code>cp -r /usr/solr/solr-7.7.2/server/solr/configsets/_default/conf /usr/solr/solrhome/new_core</code></p>
+<p>接着重启Tomcat服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 关闭Tomcat服务器</span><br><span class="line">/usr/solr/apache-tomcat-8.5.45/bin/startup.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 启动Tomcat服务器</span><br><span class="line">/usr/solr/apache-tomcat-8.5.45/bin/shutdown.sh</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/tomcat启动.png" style="width:90%;">
+</div>
+
+
+
+
+<p>再去页面创建一个与上面新建文件夹名一致的core即可，可见core添加成功！</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/core添加成功.png" style="width:90%;">
+</div>
+
+
+
+
+<p>添加成功后，会在该core的目录下生成data文件夹与core.properties文件。</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/core设置.png" style="width:50%;">
+</div>
+
+
+<hr>
+<h2 id="solr-4-10-3安装中文分词器出错"><a href="#solr-4-10-3安装中文分词器出错" class="headerlink" title="solr-4.10.3安装中文分词器出错"></a>solr-4.10.3安装中文分词器出错</h2><p><strong>错误原因：</strong>使用solr-4.10.3过程中，安装IK中文分词器后出现core不存在的问题。</p>
+<p><strong>解决方法：</strong>该版本兼容 IKAnalyzer2012_u6.jar会出现问题，换用<strong>IKAnalyzer2012FF_u1.jar</strong>即可解决问题。</p>
+<hr>
+<h2 id="solr-7-7-2使用IK中文分词器出错"><a href="#solr-7-7-2使用IK中文分词器出错" class="headerlink" title="solr-7.7.2使用IK中文分词器出错"></a>solr-7.7.2使用IK中文分词器出错</h2><p>在Linux环境下，安装好IK中文分词器后，在使用分词时会出现<code>java.lang.AbstractMethodError</code>错误。</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/分词出错.png" style="width:85%;">
+</div>
+
+<p>错误原因：当前Solr版本7.7.2，IK-analyzer版本过低，现在在网上下的IK分词器版本基本都是IKAnalyzer2012FF_u1，需要一个高版本的适配。</p>
+<p><strong>解决方法：</strong>现更换<strong>ik-analyzer-solr5-5.x</strong>版本后，分词器正常使用（也可更换5及5以上的版本）。</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/中文分词.png" style="width:85%;">
+</div>
+
+
+<hr>
+<h2 id="solr-7-7-2导入数据库数据显示不全"><a href="#solr-7-7-2导入数据库数据显示不全" class="headerlink" title="solr-7.7.2导入数据库数据显示不全"></a>solr-7.7.2导入数据库数据显示不全</h2><blockquote>
+<p>solr版本：7.7.2</p>
+<div align="center">
+ <img src="/2019/08/30/Solr学习（二）/user表结构.png" style="width:75%;">
+</div>
+
+
+<p><strong>user表结构</strong></p>
+<div align="center">
+ <img src="/2019/08/30/Solr学习（二）/根目录schema配置.png" style="width:75%;">
+</div>
+
+
+<p>根目录下managed-schema配置（id已有，无需添加）</p>
+<p>使用dataimport插件导入数据库数据后，查询发现只显示id，其余新建的域均无显示</p>
+<div align="center">
+ <img src="/2019/08/30/Solr学习（二）/查询数据.png" style="width:75%;">
+</div>
+
+
+<p>网上查找了很多的资料，都是版本不一、解决方法无效等等问题，一直都没有解决，后来想到新建的域在Analysis页面字段类型应可以被查询到，但字段还是无法被查询出来</p>
+<p>（Solr 5.3可能会出现相同的问题，原因是默认自带的managed-schema和schema.xml冲突所致，只需保存前者）</p>
+</blockquote>
+<p>通过后台管理页面来添加新的域，进入Analysis页面，点击Schema Browser</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/添加域.png" style="width:75%;">
+</div>
+
+
+
+
+<p>进入到域添加页面，点击Add Field，根据需要填写配置点击Add Field即可。</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/添加域-1.png" style="width:75%;">
+</div>
+
+
+<p>在core的根目录，<code>vim conf/managed-schema</code>可查看到新增的域信息</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/添加域-2.png" style="width:75%;">
+</div>
+
+
+<p>重启tomcat，重新导入数据，字段已能正常显示</p>
+<div align="center">
+    <img src="/2019/08/30/Solr学习（二）/查询数据-1.png" style="width:85%;">
+</div>
+
+
+<hr>
+<h2 id="连接SolrJ失败"><a href="#连接SolrJ失败" class="headerlink" title="连接SolrJ失败"></a>连接SolrJ失败</h2><blockquote>
+<div align="center">
+ <img src="/2019/08/30/Solr学习（二）/solrJ地址.png" style="width:80%;">
+</div>
+
+<div align="center">
+ <img src="/2019/08/30/Solr学习（二）/solr首页.png" style="width:80%;">
+</div>
+
+
+<div align="center">
+ <img src="/2019/08/30/Solr学习（二）/solrJ报错.png" style="width:80%;">
+</div>
+
+
+
+<p>打开Solr后台管理页面链接为：<code>http://ip地址:8080/solr/index.html#/</code>，连接SolrJ过程中，使用了相同的链接，然后打开页面出现500错误。</p>
+</blockquote>
+<p>解决方法：更换Solr地址–&gt;<code>http://ip地址:8080/solr/core名称</code>，更改后即可成功连接SolrJ，如该问题还未解决，可查看SolrJ相关的jar包是否导入成功。</p>
+<hr>
+<p>以上均是在学习Solr过程中遇到的问题，问题并不可怕，不要气馁，只需要拥有一颗坚持的心。</p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+
+    <div>
+      
+        <div style="margin-top:50px;">
+    
+        <div style="text-align:center;color: #66737f;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Solr/" rel="tag"># Solr</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/30/Solr学习/" rel="next" title="Solr学习（一）">
+                <i class="fa fa-chevron-left"></i> Solr学习（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/icon.png" alt="Sam">
+  
+  <p class="site-author-name" itemprop="name">Sam</p>
+  <div class="site-description motion-element" itemprop="description">一位新生的程序猪</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Sam2727/" title="GitHub &rarr; https://github.com/Sam2727/" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com" title="https://www.baidu.com" rel="noopener" target="_blank">Sam</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#solr无法添加core"><span class="nav-number">1.1.</span> <span class="nav-text">solr无法添加core</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#错误显示"><span class="nav-number">1.1.1.</span> <span class="nav-text">错误显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">1.1.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solr-4-10-3安装中文分词器出错"><span class="nav-number">1.2.</span> <span class="nav-text">solr-4.10.3安装中文分词器出错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solr-7-7-2使用IK中文分词器出错"><span class="nav-number">1.3.</span> <span class="nav-text">solr-7.7.2使用IK中文分词器出错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solr-7-7-2导入数据库数据显示不全"><span class="nav-number">1.4.</span> <span class="nav-text">solr-7.7.2导入数据库数据显示不全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接SolrJ失败"><span class="nav-number">1.5.</span> <span class="nav-text">连接SolrJ失败</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+
+      
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <!-- modify icon to fire by szw -->
+              <i class="fa fa-history fa-" aria-hidden="true"></i>
+              近期文章
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+              
+                <li>
+                  <a href="/2019/08/30/Solr学习（二）/" title="Solr学习（二）" target="_blank">Solr学习（二）</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/30/Solr学习/" title="Solr学习（一）" target="_blank">Solr学习（一）</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/26/CentOS搭建代理服务器/" title="CentOS搭建代理服务器" target="_blank">CentOS搭建代理服务器</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/26/次世代验证码/" title="次世代验证码识别系统的使用" target="_blank">次世代验证码识别系统的使用</a>
+                </li>
+              
+                <li>
+                  <a href="/2019/08/12/vim学习笔记/" title="Vim学习笔记" target="_blank">Vim学习笔记</a>
+                </li>
+              
+            </ul>
+          </div>
+      
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sam</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">Site words total count:33k</span>
+  
+
+<!--
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">Reading time:30 min</span>
+  
+-->
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 不蒜子浏览次数统计
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+Total <span id="busuanzi_value_site_pv"></span> views.
+<i class="fa fa-spinner fa-spin"></i> 
+您是xxx的第<span id="busuanzi_value_site_uv"></span>个小伙伴
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"> </script>
+<div>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp
+本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
+-->
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">Unique Visitor
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider"><i class="fa fa-cog fa-spin"></i> </span>
+  
+
+  
+    <span class="post-meta-item-icon">Site View
+      <i class="fa fa-plane"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+</div>
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+
+    <!-- 背景线条设置 -->
+    <!-- 
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+     -->
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+ 
+
+</body>
+</html>
